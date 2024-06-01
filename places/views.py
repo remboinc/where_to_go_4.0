@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import Place
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Place, Image
 
 
 def index(request):
@@ -17,14 +18,22 @@ def index(request):
                 "description_short": place.description_short,
                 "description_long": place.description_long,
                 "placeId": place.id,
-                "detailsUrl": {
-                    'title': place.title,
-                    'description_short': place.description_short,
-                    'description_long': place.description_long,
-                    'imgs': []
-                }
+                "detailsUrl": f"/places/{place.id}/"
             }
         }
         features.append(feature)
 
     return render(request, 'index.html', {'places_geojson': features})
+
+
+def place_detail(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    imgs = [img.get_absolute_image_url for img in place.media.all()]
+    data = {
+        'title': place.title,
+        'description_short': place.description_short,
+        'description_long': place.description_long,
+        'imgs': imgs
+    }
+
+    return JsonResponse(data, content_type='application/json', json_dumps_params={'ensure_ascii': False, 'indent': 2})

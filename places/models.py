@@ -1,4 +1,5 @@
 from django.db import models
+from where_to_go import settings
 
 
 class Place(models.Model):
@@ -20,3 +21,7 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def get_absolute_image_url(self):
+        return "{0}".format(self.image.url)
