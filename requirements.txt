@@ -1,3 +1,5 @@
 Django~=4.2.13
 pillow==10.3.0
+django-admin-sortable2==2.2.1
+geojson==3.1.0
 
