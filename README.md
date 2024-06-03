@@ -37,7 +37,7 @@ python manage.py createsuperuser
 ```commandline
 python manage.py runserver
 ```
-В терминале вы увидите тако сообщение
+В терминале вы увидите такое сообщение
 ```commandline
 Watching for file changes with StatReloader
 Performing system checks...
