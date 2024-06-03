@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE')
 
 # Application definition
@@ -126,6 +126,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = os.environ.get('STATIC_URL')
+STATIC_ROOT = os.getenv('STATIC_ROOT')
 
 MEDIA_URL = os.environ.get('MEDIA_URL')
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT')
