@@ -2,11 +2,11 @@ from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminMixin, S
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Place, Image
+from .models import Place, PlaceImage
 
 
 class ImageInline(SortableInlineAdminMixin, admin.StackedInline):
-    model = Image
+    model = PlaceImage
     readonly_fields = ('get_preview',)
     fields = ('title', 'image', 'get_preview', 'order')
 
@@ -20,7 +20,7 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [ImageInline]
 
 
-@admin.register(Image)
-class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
+@admin.register(PlaceImage)
+class PlaceImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'order')
     ordering = ('order',)

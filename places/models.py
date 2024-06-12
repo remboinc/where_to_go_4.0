@@ -9,12 +9,11 @@ class Place(models.Model):
     lng = models.FloatField(default=0)
     lat = models.FloatField(default=0)
 
-
     def __str__(self):
         return self.title
 
 
-class Image(models.Model):
+class PlaceImage(models.Model):
     place = models.ForeignKey(Place, related_name='media', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     image = models.ImageField()
@@ -29,4 +28,3 @@ class Image(models.Model):
     @property
     def get_absolute_image_url(self):
         return "{0}".format(self.image.url)
-
