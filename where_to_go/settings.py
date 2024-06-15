@@ -1,12 +1,14 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from environs import Env
 
+env = Env()
+env.read_env()
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -14,7 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 SESSION_COOKIE_SECURE = True
 
 # Application definition
@@ -61,14 +63,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DB_ENGINE'),
         'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME')),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -84,7 +84,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 LANGUAGE_CODE = 'en-us'
 
@@ -105,6 +104,5 @@ MEDIA_URL = os.environ.get('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, os.environ.get('MEDIA_ROOT'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 CSRF_COOKIE_SECURE = True
