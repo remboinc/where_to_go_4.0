@@ -22,5 +22,5 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 
 @admin.register(PlaceImage)
 class PlaceImageAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'order')
+    list_display = ('image', 'order')
     ordering = ('order',)
