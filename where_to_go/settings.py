@@ -12,10 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE')
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
@@ -99,7 +99,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = os.environ.get('STATIC_URL')
-STATIC_ROOT = os.getenv('STATIC_ROOT')
+STATIC_ROOT = 'staticfiles'
 
 MEDIA_URL = os.environ.get('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, os.environ.get('MEDIA_ROOT'))
@@ -107,4 +107,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, os.environ.get('MEDIA_ROOT'))
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CSRF_COOKIE_SECURE=os.getenv('CSRF_COOKIE_SECURE')
+CSRF_COOKIE_SECURE = True
