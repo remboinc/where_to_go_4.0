@@ -15,8 +15,8 @@ def index(request):
             },
             "properties": {
                 "title": place.title,
-                "description_short": place.description_short,
-                "description_long": place.description_long,
+                "description_short": place.short_description,
+                "description_long": place.long_description,
                 "placeId": place.id,
                 "detailsUrl": f"/places/{place.id}/"
             }
@@ -31,8 +31,8 @@ def place_detail(request, place_id):
     imgs = [img.get_absolute_image_url for img in place.media.all()]
     data = {
         'title': place.title,
-        'description_short': place.description_short,
-        'description_long': place.description_long,
+        'description_short': place.short_description,
+        'description_long': place.long_description,
         'imgs': imgs
     }
 
