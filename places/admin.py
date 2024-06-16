@@ -1,5 +1,6 @@
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminMixin, SortableAdminBase
 from django.contrib import admin
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from .models import Place, PlaceImage
@@ -11,7 +12,8 @@ class ImageInline(SortableInlineAdminMixin, admin.StackedInline):
     fields = ('title', 'image', 'get_preview', 'order')
 
     def get_preview(self, obj):
-        return mark_safe(f'<img src="{obj.image.url}" height="200" />')
+        return format_html('<img src="{}" height="200" />', mark_safe)
+
 
 
 @admin.register(Place)
