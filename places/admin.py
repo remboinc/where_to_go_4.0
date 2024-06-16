@@ -15,7 +15,6 @@ class ImageInline(SortableInlineAdminMixin, admin.StackedInline):
         return format_html('<img src="{}" style="max-height: 200px; width: auto;" />', obj.image.url)
 
 
-
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     list_display = ('title', 'short_description', 'lat', 'lng')
@@ -24,5 +23,6 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 
 @admin.register(PlaceImage)
 class PlaceImageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    raw_id_fields = ('place', )
     list_display = ('image', 'order')
     ordering = ('order',)
