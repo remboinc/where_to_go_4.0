@@ -15,7 +15,7 @@ class Place(models.Model):
 
 class PlaceImage(models.Model):
     place = models.ForeignKey(Place, related_name='media', on_delete=models.CASCADE, verbose_name='Место')
-    image = models.ImageField(verbose_name='Фото')
+    image = models.ImageField(verbose_name='Фото', db_index=True)
     order = models.PositiveIntegerField(default=0, verbose_name='Порядок фото')
 
     class Meta:
