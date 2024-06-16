@@ -9,7 +9,7 @@ from .models import Place, PlaceImage
 class ImageInline(SortableInlineAdminMixin, admin.StackedInline):
     model = PlaceImage
     readonly_fields = ('get_preview',)
-    fields = ('title', 'image', 'get_preview', 'order')
+    fields = ('image', 'get_preview', 'order')
 
     def get_preview(self, obj):
         return format_html('<img src="{}" style="max-height: 200px; width: auto;" />', obj.image.url)
