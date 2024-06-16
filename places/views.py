@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+
 from .models import Place, PlaceImage
 
 
@@ -18,7 +20,7 @@ def index(request):
                 "description_short": place.short_description,
                 "description_long": place.long_description,
                 "placeId": place.id,
-                "detailsUrl": f"/places/{place.id}/"
+                "detailsUrl": reverse('place_detail', kwargs={'id': place.id})
             }
         }
         features.append(feature)
