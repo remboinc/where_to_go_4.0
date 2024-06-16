@@ -22,7 +22,7 @@ class PlaceImage(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return self.title
+        return self.place
 
     @property
     def get_absolute_image_url(self):
