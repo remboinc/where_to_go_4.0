@@ -29,7 +29,7 @@ def index(request):
 
 
 def place_detail(request, place_id):
-    place = get_object_or_404(Place, pk=place_id)
+    place = get_object_or_404(Place.objects.select_related(), pk=place_id)
     imgs = [img.get_absolute_image_url for img in place.media.all()]
     data = {
         'title': place.title,
