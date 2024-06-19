@@ -83,7 +83,7 @@ Quit the server with CONTROL-C.
 
 Чтобы быстро добавить интересные места из JSON файла, нужно запустить команду 
 ```commandline
-python manage.py load_place /адрес к папке с json файлами/
+python manage.py load_place http://адрес/файла.json
 ```
 Пример того, как должна выглядеть стуктура json файла
 ```commandline
