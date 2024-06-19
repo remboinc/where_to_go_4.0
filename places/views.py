@@ -20,7 +20,7 @@ def index(request):
                 "description_short": place.short_description,
                 "description_long": place.long_description,
                 "placeId": place.id,
-                "detailsUrl": reverse('place_detail', kwargs={'id': place.id})
+                "detailsUrl": reverse('place_detail', kwargs={'place_id': place.id})
             }
         }
         features.append(feature)
