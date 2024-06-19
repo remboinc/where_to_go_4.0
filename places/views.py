@@ -31,11 +31,11 @@ def index(request):
 def place_detail(request, place_id):
     place = get_object_or_404(Place.objects.select_related(), pk=place_id)
     imgs = [img.get_absolute_image_url for img in place.media.all()]
-    data = {
+    serialize_place = {
         'title': place.title,
         'description_short': place.short_description,
         'description_long': place.long_description,
         'imgs': imgs
     }
 
-    return JsonResponse(data, content_type='application/json', json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(serialize_place, content_type='application/json', json_dumps_params={'ensure_ascii': False, 'indent': 2})
