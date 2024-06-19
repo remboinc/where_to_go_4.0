@@ -33,8 +33,8 @@ def load_place_to_admin_panel(template):
     place, created = Place.objects.get_or_create(
         title=template.get('title'),
         defaults={
-            'description_short': template.get('description_short'),
-            'description_long': template.get('description_long'),
+            'short_description': template.get('description_short'),
+            'long_description': template.get('description_long'),
             'lng': template.get('coordinates', {}).get('lng'),
             'lat': template.get('coordinates', {}).get('lat'),
         }
