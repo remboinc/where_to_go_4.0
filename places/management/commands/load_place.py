@@ -43,10 +43,9 @@ def load_place_to_admin_panel(template):
     if created:
         print('Новый объект был создан.')
         for index, b_image in enumerate(images):
-            image_name = f'{place.title}_{place.id}_{index}.jpg'
+            image_name = f'{place.id}_{index}.jpg'
             image_of_place = PlaceImage.objects.create(
                 place=place,
-                title=image_name,
             )
             try:
                 image_of_place.image.save(image_name, ContentFile(b_image), save=True)
