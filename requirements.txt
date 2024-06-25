@@ -1,5 +1,4 @@
 Django~=4.2.13
-python-dotenv==1.0.1
 django-admin-sortable2==2.2.1
 django-tinymce==4.0.0
 pillow==10.3.0

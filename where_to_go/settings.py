@@ -1,17 +1,15 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
 from environs import Env
 
 env = Env()
 env.read_env()
 
-load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -65,8 +63,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME')),
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
     }
 }
 
@@ -94,14 +92,14 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, os.environ.get('STATICFILES_DIRS')),
+    os.path.join(BASE_DIR, env('STATICFILES_DIRS')),
 ]
 
-STATIC_URL = os.environ.get('STATIC_URL')
+STATIC_URL = env('STATIC_URL')
 STATIC_ROOT = 'staticfiles'
 
-MEDIA_URL = os.environ.get('MEDIA_URL')
-MEDIA_ROOT = os.path.join(BASE_DIR, os.environ.get('MEDIA_ROOT'))
+MEDIA_URL = env('MEDIA_URL')
+MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
