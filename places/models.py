@@ -20,6 +20,11 @@ class PlaceImage(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['order']),
+        ]
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
 
     @property
     def get_absolute_image_url(self):
