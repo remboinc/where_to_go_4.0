@@ -27,10 +27,8 @@ def load_place_from_url(url):
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f'Ошибка при загрузке данных из URL {url}: {e}')
-        return None
     except json.JSONDecodeError as e:
         print(f'Ошибка при парсинге JSON из URL {url}: {e}')
-        return None
 
 
 def load_place_to_admin_panel(template):
