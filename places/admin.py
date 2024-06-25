@@ -12,7 +12,7 @@ class ImageInline(SortableInlineAdminMixin, admin.StackedInline):
     fields = ('image', 'get_preview', 'order')
 
     def get_preview(self, obj):
-        return format_html('<img src="{}" style="max-height: 200px; width: auto;" />', obj.image.url)
+        return format_html('<img src="{}" style="max-height: 200px; max-width: 500px;" />', obj.image.url)
 
 
 @admin.register(Place)
