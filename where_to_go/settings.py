@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 SESSION_COOKIE_SECURE = True
@@ -96,7 +96,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = env('STATIC_URL')
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = env('STATIC_ROOT')
 
 MEDIA_URL = env('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT'))
