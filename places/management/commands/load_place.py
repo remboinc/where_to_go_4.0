@@ -13,9 +13,9 @@ def get_image(images_urls):
             response.raise_for_status()
             b_image = response.content
             images.append(b_image)
-            print(f"Изображение успешно загружено: {image_url}")
+            print(f'Изображение успешно загружено: {image_url}')
         except requests.exceptions.RequestException as e:
-            print(f"Ошибка при загрузке изображения {image_url}: {e}")
+            print(f'Ошибка при загрузке изображения {image_url}: {e}')
     return images
 
 
@@ -23,13 +23,13 @@ def load_place_from_url(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        print(f"Данные успешно загружены из URL: {url}")
+        print(f'Данные успешно загружены из URL: {url}')
         return response.json()
     except requests.exceptions.RequestException as e:
-        print(f"Ошибка при загрузке данных из URL {url}: {e}")
+        print(f'Ошибка при загрузке данных из URL {url}: {e}')
         return None
     except json.JSONDecodeError as e:
-        print(f"Ошибка при парсинге JSON из URL {url}: {e}")
+        print(f'Ошибка при парсинге JSON из URL {url}: {e}')
         return None
 
 
@@ -54,9 +54,9 @@ def load_place_to_admin_panel(template):
             )
             try:
                 image_of_place.image.save(image_name, ContentFile(b_image), save=True)
-                print(f"Изображение {image_name} успешно сохранено.")
+                print(f'Изображение {image_name} успешно сохранено.')
             except Exception as e:
-                print(f"Ошибка при сохранении изображения {image_name}: {e.__class__.__name__} - {e}")
+                print(f'Ошибка при сохранении изображения {image_name}: {e.__class__.__name__} - {e}')
     else:
         print('Объект был найден в базе данных.')
 
