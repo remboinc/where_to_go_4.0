@@ -30,7 +30,7 @@ def index(request):
 
 def place_detail(request, place_id):
     place = get_object_or_404(Place.objects.prefetch_related('images'), pk=place_id)
-    imgs = [img.get_absolute_image_url for img in place.media.all()]
+    imgs = [img.get_absolute_image_url for img in place.images.all()]
     serialize_place = {
         'title': place.title,
         'description_short': place.short_description,
