@@ -31,8 +31,10 @@ def load_place_to_admin_panel(template):
                 response.raise_for_status()
                 b_image = response.content
                 image_name = f'{place.id}_{index}.jpg'
-                image_of_place = PlaceImage.objects.create(place=place)
-                image_of_place.image.save(image_name, ContentFile(b_image), save=True)
+                PlaceImage.objects.create(
+                    place=place,
+                    image=ContentFile(b_image, name=image_name)
+                )
                 print(f'Изображение {image_name} успешно сохранено.')
             except requests.exceptions.RequestException as e:
                 print(f'Ошибка при загрузке изображения {image_url}: {e}')
