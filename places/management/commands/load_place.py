@@ -36,16 +36,16 @@ def load_place_to_admin_panel(template):
     images = get_images(template.get('imgs', []))
     try:
         place, created = Place.objects.get_or_create(
-            title=template.get('title'),
+            title=template['title'],
             defaults={
-                'short_description': template.get('description_short'),
-                'long_description': template.get('description_long'),
-                'lng': template.get('coordinates', {}).get('lng'),
-                'lat': template.get('coordinates', {}).get('lat'),
+                'short_description': template['description_short'],
+                'long_description': template['description_long'],
+                'lng': template['coordinates']['lng'],
+                'lat': template['coordinates']['lat'],
             }
         )
     except MultipleObjectsReturned:
-        places = Place.objects.filter(title=template.get('title'))
+        places = Place.objects.filter(title=template['title'])
         place = places.first()
         created = False
         print(f'Найдено несколько мест с заголовком "{template.get("title")}". Используется первый найденный.')
