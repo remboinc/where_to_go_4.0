@@ -3,9 +3,10 @@ import requests
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from places.models import Place, PlaceImage
+from django.core.exceptions import MultipleObjectsReturned
 
 
-def get_image(images_urls):
+def get_images(images_urls):
     images = []
     for image_url in images_urls:
         try:
@@ -32,24 +33,28 @@ def load_place_from_url(url):
 
 
 def load_place_to_admin_panel(template):
-    images = get_image(template.get('imgs', []))
-    place, created = Place.objects.get_or_create(
-        title=template.get('title'),
-        defaults={
-            'short_description': template.get('description_short'),
-            'long_description': template.get('description_long'),
-            'lng': template.get('coordinates', {}).get('lng'),
-            'lat': template.get('coordinates', {}).get('lat'),
-        }
-    )
+    images = get_images(template.get('imgs', []))
+    try:
+        place, created = Place.objects.get_or_create(
+            title=template.get('title'),
+            defaults={
+                'short_description': template.get('description_short'),
+                'long_description': template.get('description_long'),
+                'lng': template.get('coordinates', {}).get('lng'),
+                'lat': template.get('coordinates', {}).get('lat'),
+            }
+        )
+    except MultipleObjectsReturned:
+        places = Place.objects.filter(title=template.get('title'))
+        place = places.first()
+        created = False
+        print(f'Найдено несколько мест с заголовком "{template.get("title")}". Используется первый найденный.')
 
     if created:
         print('Новый объект был создан.')
         for index, b_image in enumerate(images):
             image_name = f'{place.id}_{index}.jpg'
-            image_of_place = PlaceImage.objects.create(
-                place=place,
-            )
+            image_of_place = PlaceImage.objects.create(place=place)
             try:
                 image_of_place.image.save(image_name, ContentFile(b_image), save=True)
                 print(f'Изображение {image_name} успешно сохранено.')
@@ -58,14 +63,14 @@ def load_place_to_admin_panel(template):
     else:
         print('Объект был найден в базе данных.')
 
-    print('Объект имеет ID:', place.id)
+    print(f'Объект имеет ID: {place.id}')
 
 
 class Command(BaseCommand):
     help = 'Load place data from a JSON file URL'
 
     def add_arguments(self, parser):
-        parser.add_argument('url', type=str, help='The URL of the JSON file containing place data')
+        parser.add_argument('url', type=str, help='URL JSON-файла с данными места')
 
     def handle(self, *args, **kwargs):
         url = kwargs['url']
