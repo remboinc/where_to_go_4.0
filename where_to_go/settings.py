@@ -63,8 +63,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DB_ENGINE'),
-        'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
+        'ENGINE': env.str('DB_ENGINE'),
+        'NAME': os.path.join(BASE_DIR, env.str('DB_NAME')),
     }
 }
 
@@ -95,11 +95,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, env('STATICFILES_DIRS')),
 ]
 
-STATIC_URL = env('STATIC_URL')
-STATIC_ROOT = env('STATIC_ROOT')
+STATIC_URL = env.url('STATIC_URL')
+STATIC_ROOT = env.path('STATIC_ROOT')
 
-MEDIA_URL = env('MEDIA_URL')
-MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT'))
+MEDIA_URL = env.url('MEDIA_URL')
+MEDIA_ROOT = os.path.join(BASE_DIR, env.path('MEDIA_ROOT'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
