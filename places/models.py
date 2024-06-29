@@ -28,4 +28,4 @@ class PlaceImage(models.Model):
 
     @property
     def get_absolute_image_url(self):
-        return "{0}".format(self.image.url)
+        return f'{self.image.url}'
