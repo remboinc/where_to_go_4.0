@@ -9,12 +9,12 @@ env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 SESSION_COOKIE_SECURE = True
 
 # Application definition
@@ -63,8 +63,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env.str('DB_ENGINE'),
-        'NAME': os.path.join(BASE_DIR, env.str('DB_NAME')),
+        'ENGINE': env.str('DB_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, env.str('DB_NAME', default='db.sqlite3')),
     }
 }
 
@@ -92,14 +92,14 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, env('STATICFILES_DIRS')),
+    os.path.join(BASE_DIR, env('STATICFILES_DIRS', default=['static'])),
 ]
 
-STATIC_URL = env.url('STATIC_URL')
-STATIC_ROOT = env.path('STATIC_ROOT')
+STATIC_URL = env.url('STATIC_URL', default='/static/')
+STATIC_ROOT = env.path('STATIC_ROOT', default='staticfiles')
 
-MEDIA_URL = env.url('MEDIA_URL')
-MEDIA_ROOT = os.path.join(BASE_DIR, env.path('MEDIA_ROOT'))
+MEDIA_URL = env.url('MEDIA_URL', default='/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, env.path('MEDIA_ROOT', default='media'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
