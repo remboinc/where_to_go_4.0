@@ -92,7 +92,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, env('STATICFILES_DIRS', default=['static'])),
+    os.path.join(BASE_DIR, env('STATICFILES_DIRS', default='static')),
 ]
 
 STATIC_URL = env.str('STATIC_URL', default='/static/')
